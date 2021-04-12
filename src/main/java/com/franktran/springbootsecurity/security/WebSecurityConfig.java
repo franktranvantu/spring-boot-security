@@ -1,7 +1,6 @@
 package com.franktran.springbootsecurity.security;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -10,9 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-
-import static com.franktran.springbootsecurity.security.UserPermission.*;
-import static com.franktran.springbootsecurity.security.UserRole.*;
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -26,14 +22,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/students/public").permitAll()
-                .antMatchers("/students/**").hasRole(STUDENT.name())
-                .antMatchers(HttpMethod.DELETE, "/management/**").hasAuthority(STUDENT_WRITE.getPermission())
-                .antMatchers(HttpMethod.POST, "/management/**").hasAuthority(STUDENT_WRITE.getPermission())
-                .antMatchers(HttpMethod.PUT, "/management/**").hasAuthority(STUDENT_WRITE.getPermission())
-                .antMatchers(HttpMethod.GET, "/management/**").hasAnyRole(ADMIN.name(), ADMINTRAINEE.name())
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -46,21 +36,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         UserDetails frank = User.builder()
                 .username("frank")
                 .password(passwordEncoder.encode("frank123"))
-//                .roles(ADMIN.name())
-                .authorities(ADMIN.getAuthorities())
+                .roles("ADMIN")
                 .build();
+
         UserDetails henry = User.builder()
                 .username("henry")
                 .password(passwordEncoder.encode("henry123"))
-//                .roles(ADMINTRAINEE.name())
-                .authorities(ADMINTRAINEE.getAuthorities())
+                .roles("ADMINTRAINEE")
                 .build();
+
         UserDetails bean = User.builder()
                 .username("bean")
                 .password(passwordEncoder.encode("bean123"))
-//                .roles(STUDENT.name())
-                .authorities(STUDENT.getAuthorities())
+                .roles("STUDENT")
                 .build();
+
         return new InMemoryUserDetailsManager(frank, henry, bean);
     }
 }
