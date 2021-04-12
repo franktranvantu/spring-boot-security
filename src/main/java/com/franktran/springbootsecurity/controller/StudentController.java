@@ -19,6 +19,11 @@ public class StudentController {
             new Student(3, "Bea", "bean@gmail.com")
     );
 
+    @GetMapping("/public")
+    public String publicResources() {
+        return "This is public resources";
+    }
+
     @GetMapping
     public List<Student> getAllStudent() {
         return STUDENTS;
