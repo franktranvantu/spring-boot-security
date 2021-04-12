@@ -1,4 +1,4 @@
-package com.franktran.springbootsecurity.config;
+package com.franktran.springbootsecurity.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
