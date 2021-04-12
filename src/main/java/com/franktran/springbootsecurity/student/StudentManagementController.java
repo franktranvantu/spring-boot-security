@@ -24,11 +24,6 @@ public class StudentManagementController {
         add(new Student(3, "Bean", "bean@gmail.com"));
     }};
 
-    @GetMapping("/public")
-    public String publicResources() {
-        return "This is public resources";
-    }
-
     @GetMapping
     public List<Student> getAllStudent() {
         return STUDENTS;
