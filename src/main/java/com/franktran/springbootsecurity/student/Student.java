@@ -1,4 +1,4 @@
-package com.franktran.springbootsecurity.model;
+package com.franktran.springbootsecurity.student;
 
 public class Student {
 
