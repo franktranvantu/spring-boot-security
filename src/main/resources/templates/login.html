@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8">
+  <title>Custom Login</title>
+</head>
+<body>
+  <form th:action="@{/process-login}" th:object="${user}" method="post">
+    <p>
+      <label for="email">Email:</label>
+      <input type="email" th:field="*{email}" id="email">
+    </p>
+    <p>
+      <label for="password">Password:</label>
+      <input type="password" th:field="*{password}" id="password">
+    </p>
+    <p>
+      <button>Submit</button>
+    </p>
+  </form>
+</body>
+</html>
