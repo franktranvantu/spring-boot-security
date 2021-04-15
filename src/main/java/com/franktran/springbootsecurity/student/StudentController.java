@@ -1,12 +1,10 @@
 package com.franktran.springbootsecurity.student;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/students")
@@ -35,5 +33,29 @@ public class StudentController {
                 .parallel()
                 .findAny()
                 .orElse(null);
+    }
+
+    @PostMapping
+    public void createStudent(@RequestBody Student student) {
+        STUDENTS.add(student);
+    }
+
+    @PutMapping("/{id}")
+    public void updateStudent(@PathVariable int id, @RequestBody Student student) {
+        Student existStudent = getStudentById(id);
+        if (Objects.nonNull(existStudent)) {
+            existStudent.setName(student.getName());
+            existStudent.setEmail(student.getEmail());
+            int index = STUDENTS.indexOf(existStudent);
+            STUDENTS.set(index, existStudent);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteStudent(@PathVariable int id) {
+        Student existStudent = getStudentById(id);
+        if (Objects.nonNull(existStudent)) {
+            STUDENTS.remove(existStudent);
+        }
     }
 }

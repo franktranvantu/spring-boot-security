@@ -47,6 +47,8 @@ public class StudentManagementController {
     public void updateStudent(@PathVariable int id, @RequestBody Student student) {
         Student existStudent = getStudentById(id);
         if (Objects.nonNull(existStudent)) {
+            existStudent.setName(student.getName());
+            existStudent.setEmail(student.getEmail());
             int index = STUDENTS.indexOf(existStudent);
             STUDENTS.set(index, student);
         }
