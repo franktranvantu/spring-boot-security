@@ -1,7 +1,6 @@
 package com.franktran.springbootsecurity.security;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -10,8 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-
-import static com.franktran.springbootsecurity.security.UserRole.*;
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -28,8 +25,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/students/public").permitAll()
-                .antMatchers("/students/**").hasRole(STUDENT.name())
-                .antMatchers(HttpMethod.GET, "/management/**").hasAnyRole(ADMIN.name(), ADMINTRAINEE.name())
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -42,19 +37,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         UserDetails frank = User.builder()
                 .username("frank")
                 .password(passwordEncoder.encode("frank123"))
-                .roles(ADMIN.name())
+                .roles("ADMIN") // ROLE_ADMIN
                 .build();
 
         UserDetails henry = User.builder()
                 .username("henry")
                 .password(passwordEncoder.encode("henry123"))
-                .roles(ADMINTRAINEE.name())
+                .roles("ADMINTRAINEE") // ROLE_ADMINTRAINEE
                 .build();
 
         UserDetails bean = User.builder()
                 .username("bean")
                 .password(passwordEncoder.encode("bean123"))
-                .roles(STUDENT.name())
+                .roles("STUDENT") // ROLE_STUDENT
                 .build();
 
         return new InMemoryUserDetailsManager(frank, henry, bean);

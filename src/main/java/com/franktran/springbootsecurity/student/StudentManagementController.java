@@ -40,6 +40,9 @@ public class StudentManagementController {
 
     @PostMapping
     public void createStudent(@RequestBody Student student) {
+        Student lastStudent = STUDENTS.get(STUDENTS.size() - 1);
+        int id = lastStudent.getId() + 1;
+        student.setId(id);
         STUDENTS.add(student);
     }
 
