@@ -1,5 +1,6 @@
 package com.franktran.springbootsecurity.student;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,11 +25,13 @@ public class StudentController {
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('ROLE_STUDENT')")
     public List<Student> getAllStudent() {
         return STUDENTS;
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_STUDENT')")
     public Student getStudentById(@PathVariable int id) {
         return STUDENTS.stream()
                 .filter(student -> student.getId() == id)
