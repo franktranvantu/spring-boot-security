@@ -43,6 +43,24 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>home</id>
+            <properties>
+                <spring.profile.active>home</spring.profile.active>
+            </properties>
+        </profile>
+        <profile>
+            <id>office</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <spring.profile.active>office</spring.profile.active>
+            </properties>
+        </profile>
+    </profiles>
+
     <build>
         <plugins>
             <plugin>
