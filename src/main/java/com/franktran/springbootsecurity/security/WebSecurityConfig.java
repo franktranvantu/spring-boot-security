@@ -35,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/show-login").permitAll()
                 .loginProcessingUrl("/process-login")
                 .and()
-                .rememberMe();
+                .rememberMe(); // default is 2 weeks
     }
 
     @Override
