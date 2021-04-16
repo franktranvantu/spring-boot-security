@@ -1,4 +1,4 @@
-package com.franktran.springbootsecurity.user;
+package com.franktran.springbootsecurity.login;
 
 public class User {
 
