@@ -11,8 +11,8 @@ import static com.franktran.springbootsecurity.security.UserPermission.*;
 
 public enum UserRole {
 
-    ADMIN(Sets.newHashSet(STUDENT_READ, STUDENT_WRITE, COURSE_READ, COURSE_WRITE)),
-    ADMINTRAINEE(Sets.newHashSet(STUDENT_READ, COURSE_READ)),
+    ADMIN(Sets.newHashSet(STUDENT_READ, STUDENT_WRITE)),
+    ADMINTRAINEE(Sets.newHashSet(STUDENT_READ)),
     STUDENT(Sets.newHashSet());
 
     private final Set<UserPermission> permissions;
