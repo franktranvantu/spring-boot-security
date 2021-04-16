@@ -3,9 +3,7 @@ package com.franktran.springbootsecurity.security;
 public enum UserPermission {
 
     STUDENT_READ("STUDENT:READ"),
-    STUDENT_WRITE("STUDENT:WRITE"),
-    COURSE_READ("COURSE:READ"),
-    COURSE_WRITE("COURSE:WRITE");
+    STUDENT_WRITE("STUDENT:WRITE");
 
     private final String permission;
 
