@@ -35,10 +35,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/show-login").permitAll()
-                .loginProcessingUrl("/process-login")
+                .loginProcessingUrl("/process-login").defaultSuccessUrl("/management/students")
                 .and()
                 .rememberMe()
-                .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(20)).key("frank");
+                .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(20)).key("frank")
+                .and().logout()
+                    .logoutUrl("/logout")
+                    .clearAuthentication(true)
+                    .invalidateHttpSession(true)
+                    .deleteCookies("JSESSIONID", "remember-me")
+                    .logoutSuccessUrl("/show-login");
 
     }
 
