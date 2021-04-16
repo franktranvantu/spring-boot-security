@@ -13,7 +13,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 import static com.franktran.springbootsecurity.security.UserRole.*;
 
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -28,11 +28,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/show-login", "/process-login").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
-                .formLogin();
+                .formLogin()
+                .loginPage("/show-login").permitAll();
     }
 
     @Override
