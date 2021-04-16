@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+import java.util.concurrent.TimeUnit;
+
 import static com.franktran.springbootsecurity.security.UserRole.*;
 
 @EnableWebSecurity
@@ -35,7 +37,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/show-login").permitAll()
                 .loginProcessingUrl("/process-login")
                 .and()
-                .rememberMe(); // default is 2 weeks
+                .rememberMe()
+                .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(20)).key("frank");
+
     }
 
     @Override
