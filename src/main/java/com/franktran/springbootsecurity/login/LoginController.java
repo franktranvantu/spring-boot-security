@@ -13,10 +13,4 @@ public class LoginController {
     public String showLogin(@ModelAttribute("account") Account account) {
         return "login";
     }
-
-    @PostMapping("/process-login")
-    @ResponseBody
-    public Account processLogin(Account account) {
-        return account;
-    }
 }
