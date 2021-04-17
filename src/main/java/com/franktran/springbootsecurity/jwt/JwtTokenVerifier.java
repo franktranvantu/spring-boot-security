@@ -56,5 +56,7 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
     } catch (JwtException e) {
       throw new IllegalArgumentException("Token is invalid");
     }
+
+    filterChain.doFilter(request, response);
   }
 }
