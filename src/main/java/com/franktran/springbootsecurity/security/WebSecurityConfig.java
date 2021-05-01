@@ -58,19 +58,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     protected UserDetailsService userDetailsService() {
         UserDetails frank = User.builder()
-                .username("frank")
+                .username("frank@gmail.com")
                 .password(passwordEncoder.encode("frank123"))
                 .authorities(ADMIN.getAuthorities())
                 .build();
 
         UserDetails henry = User.builder()
-                .username("henry")
+                .username("henry@gmail.com")
                 .password(passwordEncoder.encode("henry123"))
                 .authorities(ADMINTRAINEE.getAuthorities())
                 .build();
 
         UserDetails bean = User.builder()
-                .username("bean")
+                .username("bean@gmail.com")
                 .password(passwordEncoder.encode("bean123"))
                 .authorities(STUDENT.getAuthorities())
                 .build();
